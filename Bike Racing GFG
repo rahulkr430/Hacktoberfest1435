@@ -1,0 +1,63 @@
+// { Driver Code Starts
+// Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+// User function Template for C++
+
+class Solution{
+public:
+    long ts(long N, long L, long H[], long A[], long mid){
+        long tsum=0;
+         for(int i=0; i<N; i++){
+                if(H[i]+mid*A[i]>L)
+                tsum+=H[i]+mid*A[i];
+                
+            }
+            return tsum;
+    }
+    long buzzTime(long N, long M, long L, long H[], long A[])
+    {
+        // code here
+        
+        long h=pow(10, 10), l=0, mid;
+        
+        
+        while(1){
+            
+            mid=l+(h-l)/2;
+           
+            if(ts(N,L,H,A,mid)>=M && ts(N,L,H,A,mid-1)<M)
+            break;
+            
+            if(ts(N,L,H,A,mid)<M)
+            l=mid;
+            
+            if(ts(N,L,H,A,mid)>M)
+            h=mid;
+            
+            
+        }
+       return mid; 
+    }
+};
+
+// { Driver Code Starts.
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        long N, M, L;
+        cin>>N>>M>>L;
+        long H[N], A[N];
+        for(long i = 0;i < N;i++) 
+            cin>>H[i]>>A[i];
+        
+        Solution ob;
+        cout<<ob.buzzTime(N, M, L, H, A)<<"\n";
+    }
+    return 0;
+}  // } Driver Code Ends
