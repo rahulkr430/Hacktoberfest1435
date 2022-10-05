@@ -1,0 +1,92 @@
+/**
+ * Code Written by hritikhrk (Hritik Kumar)
+ */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define IOS                  \
+    ios::sync_with_stdio(0); \
+    cin.tie(0);              \
+    cout.tie(0);
+#define endl "\n"
+#define F first
+#define S Second
+#define VI vector<int>
+#define VLL vector<long long>
+#define PII pair<int, int>
+#define MII map<int, int>
+#define pb push_back()
+#define all(x) x.begin(), x.end()
+#define allr(x) x.rbegin(), x.rend()
+
+const int MOD = 1e9 + 7;
+
+inline ll mod(ll x, ll m)
+{
+    return (x % m + m) % m;
+}
+
+int lcSubstring(string x, string y, int n, int m)
+{
+    int dp[n + 1][m + 1];
+    for (int i = 0; i < n + 1; i++)
+    {
+        dp[i][0] = 0;
+    }
+    for (int i = 0; i < m + 1; i++)
+    {
+        dp[0][i] = 0;
+    }
+    int result = 0;
+    for (int i = 1; i < n + 1; i++)
+    {
+        for (int j = 1; j < m + 1; j++)
+        {
+            if (x[i - 1] == y[j - 1])
+            {
+                dp[i][j] = 1 + dp[i - 1][j - 1];
+                result = max(result, dp[i][j]);
+            }
+            else
+                dp[i][j] = 0;
+        }
+    }
+    return result;
+}
+
+void solve()
+{
+    string x, y;
+    cin >> x >> y;
+    int n = x.length();
+    int m = y.length();
+    cout << lcSubstring(x, y, n, m) << endl; //dp
+    return;
+}
+
+int main()
+{
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+
+    IOS;
+
+    //Code starts from here //
+    int testCases;
+    cin >> testCases;
+    while (testCases--)
+        solve();
+    // Code end here //
+    return 0;
+}
+
+// INPUT:
+// abcde
+// abfce
+
+// OUTPUT:
+// 2
